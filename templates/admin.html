@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- <link rel="stylesheet" href="src/bootstrap/css/bootstrap.min.css"> -->
+    <!-- <script src="src/js/jquery-3.2.1.min.js"></script>     -->
+    <!-- <script src="src/bootstrap/js/bootstrap.min.js"></script> -->
+  
+
+
+</head>
+    <body>
+        <!-- Put Content Here -->
+
+        <div>
+            <div>
+                <p style="font-size: 150%"> Admin - panel </p> 
+            </div>
+            <div>
+                Welcome {{username}}
+            </div>
+        </div>
+
+        {% for i in users %}
+            <!-- {{i}} -->
+            {{i.0}} {{i.1}} <form method="post"> <button type="submit" style="background-color:red" name="delete" value={{i.2}}>del</button></form>
+        {% endfor %}
+    </body>
+</html>
+
+<style>
+    html{
+        font-family: Arial;
+    }
+</style>
