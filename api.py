@@ -1,9 +1,8 @@
 from flask import Flask, g, render_template, make_response, redirect
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_restful import reqparse, Api
+from flask_restful import reqparse, Api, Resource
 from models import db, User
-from flask_restful import Resource
 
 
 
@@ -11,11 +10,15 @@ app = Flask(__name__)
 api = Api(app)
 app.config['DEBUG'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///main.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True #This adds signifcant overhead
 
 with app.app_context():
     db.init_app(app)
-    # db.create_all()
 
+def init_db():
+    print("init db")
+    with app.app_context():
+        db.create_all()
 
 basic_auth = HTTPBasicAuth()
 
@@ -89,9 +92,7 @@ class Logout(Resource):
         g.user = None
         return ('Logout', 401)
 
-
 class Register(Resource):
-
 
     def get(self):
         return ('Error', 404)
